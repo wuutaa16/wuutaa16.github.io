@@ -1,51 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Sweet Seventeen 💖</title>
+  <title>Untuk Kamu 🤍</title>
   <style>
     body {
-      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffe6f0, #fff);
       min-height: 100vh;
       display: flex;
-      justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #ffd6e8, #e0c3fc);
-      font-family: Arial, sans-serif;
+      justify-content: center;
+      margin: 0;
     }
     .card {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 25px;
-      border-radius: 25px;
-      max-width: 380px;
+      background: white;
+      padding: 24px;
+      border-radius: 20px;
+      max-width: 420px;
+      width: 90%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       text-align: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     }
-    h1 {
-      color: #e91e63;
-      margin-bottom: 15px;
+    h2 { margin-bottom: 16px; }
+    p { line-height: 1.6; }
+    input {
+      padding: 10px;
+      width: 100%;
+      margin-bottom: 16px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
     }
-    p {
-      color: #444;
-      font-size: 14px;
-      line-height: 1.7;
+    button {
+      padding: 12px 16px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 6px;
     }
-    .footer {
-      margin-top: 20px;
-      color: #e91e63;
-      font-weight: 500;
-    }
+    .green { background: #4CAF50; color: white; }
+    .red { background: #f44336; color: white; }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>🎀 Happy Sweet Seventeen 🎀</h1>
+  <div class="card" id="app"></div>
 
-    <p>
-      Sweet seventeen — the age where dreams feel closer and hopes grow bigger ✨
-    </p>
+  <script>
+    const app = document.getElementById('app');
+    let step = 0;
 
-    <p>
-      Di umur 17 ini, semoga kamu selalu dikelilingi kebahagiaan,
-      cinta
+    function render() {
+      if (step === 0) {
+        app.innerHTML = `
+          <h2>Masukin Kode Dulu 🤍</h2>
+          <input type="password" id="code" placeholder="Kode rahasia" />
+          <button class="green" onclick="checkCode()">Masuk</button>
+        `;
+      }
+
+      if (step === 1) {
+        question(
+          'kamu sayang aku ngga?',
+          'SAYANGGG BANGETT'
+        );
+      }
+
+      if (step === 2) {
+        question(
+          'kamu cinta aku ngga?',
+          'CINTAA BANGETT I LOVEE UU'
+        );
+      }
+
+      if (step === 3) {
+        question(
+          'mau lanjut atau tidak?',
+          'MAUU BANGETT'
+        );
+      }
+
+      if (step === 4) {
+        app.innerHTML = `
+          <h2>Untuk Kamu 🤍</h2>
+          <p>
+          aku nggak pernah nyangka kalau punya kamu bisa bikin aku sebahagia ini tapi kadang bikin kesel juga si.
+          cara kamu perhatian, sampai caramu selalu ada itu semua bikin aku ngerasa beruntung banget.<br><br>
+
+          kadang aku capek, kadang aku bad mood, tapi kamu selalu jadi alasan kenapa aku bisa tenang lagi.<br><br>
+
+          kamu itu rumah buat aku 🏠💞<br>
+          tempat aku cerita, ketawa, sedih, dll. 🤍<br><br>
+
+          i just want you to know how much you mean to me. you are my comfort, my safe place, and my favorite person.
+          even on my worst days, thinking about you makes everything feel better ✨<br><br>
+
+          terima kasih ya sudah bertahan sejauh ini 🤍<br>
+          terima kasih sudah sabar, sudah peduli. aku harap ke depannya kita bisa sama-sama tumbuh,
+          sama-sama belajar yaaa<br><br>
+
+          please always take care of yourself, okay?<br>
+          because you’re very precious to me, i lovee uuu so muchh 🙆‍♀️🤍
+          </p>
+        `;
+      }
+    }
+
+    function checkCode() {
+      const code = document.getElementById('code').value;
+      if (code === '1623') {
+        step = 1;
+        render();
+      } else {
+        alert('Kode salah 😜');
+      }
+    }
+
+    function question(text, greenText) {
+      app.innerHTML = `
+        <h2>${text}</h2>
+        <button class="green" onclick="next()">${greenText}</button><br>
+        <button class="red" onclick="force()">tidaa</button>
+      `;
+    }
+
+    function next() {
+      step++;
+      render();
+    }
+
+    function force() {
+      alert('Eits 😝 nggak boleh itu, pilih yang hijau yaa 💚');
+    }
+
+    render();
+  </script>
+</body>
+</html>
