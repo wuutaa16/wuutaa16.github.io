@@ -1,3 +1,6 @@
+<button onclick="playMusic()" class="ghost">
+  ▶️ Putar Lagu (About You - The 1975)
+</button>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -175,3 +178,11 @@ render();
 </script>
 </body>
 </html>
+function playMusic() {
+  const iframe = document.createElement("iframe");
+  iframe.style.display = "none";
+  iframe.allow = "autoplay";
+  iframe.src =
+    "https://www.youtube.com/embed/tGv7CUutzqU?autoplay=1&controls=0";
+  document.body.appendChild(iframe);
+}
