@@ -1,1 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Happy 17th Birthday 🎂🤍</title>
+<style>
+body{
+  margin:0;min-height:100vh;font-family:'Poppins',system-ui,Arial;
+  background:linear-gradient(135deg,#ffe6f0,#fff);
+  display:flex;align-items:center;justify-content:center;overflow:hidden
+}
+.card{
+  background:white;width:95%;max-width:520px;
+  padding:22px;border-radius:22px;
+  box-shadow:0 20px 50px rgba(0,0,0,.15);
+  text-align:center;position:relative;z-index:2
+}
+h2{margin:6px 0}
+p{line-height:1.7}
+button{padding:12px 16px;border:none;border-radius:14px;font-size:16px;margin:6px;cursor:pointer}
+.green{background:#4CAF50;color:white}
+.red{background:#f44336;color:white}
+.ghost{background:#fff;border:1px solid #eee}
 
+/* dekor */
+.float{position:absolute;bottom:-10%;font-size:22px;animation:up 8s linear forwards}
+@keyframes up{from{transform:translateY(0);opacity:1}to{transform:translateY(-120vh);opacity:0}}
+
+.cake{font-size:90px;cursor:pointer}
+.candle{font-size:28px}
+.balloon{font-size:48px;cursor:pointer}
+.bigkiss{font-size:80px}
+
+.envelope{width:220px;height:140px;margin:12px auto;background:#fff0f6;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.15);cursor:pointer;position:relative}
+.envelope::after{content:'💌';font-size:40px;position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+
+img{max-width:100%;border-radius:16px;margin:8px 0}
+</style>
+</head>
+<body>
+<div class="card" id="app"></div>
+
+<script>
+const app=document.getElementById('app');
+let step=0;
+let candles=3;
+let balloons=0;
+let taps=0;
+
+// music
+const music=document.createElement('iframe');
+music.style.display='none';
+music.src='https://www.youtube.com/embed/tGv7CUutzqU?autoplay=1';
+music.allow='autoplay';
+document.body.appendChild(music);
+
+function floatEmoji(){
+  const e=['💖','🌸','🌷','🌹','🤍','💐','💞'];
+  const el=document.createElement('div');
+  el.className='float';
+  el.textContent=e[Math.floor(Math.random()*e.length)];
+  el.style.left=Math.random()*100+'%';
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),8000)
+}
+setInterval(floatEmoji,700);
+
+function render(){
+if(step===0){
+app.innerHTML=`
+<h2>Tiup Lilin Dulu 🎂</h2>
+<div class='cake'>🎂</div>
+<div>${'🕯️'.repeat(candles)}</div>
+<p>Klik lilinnya sampai mati ya 🤍</p>`;
+app.querySelector('.cake').onclick=()=>{
+ if(candles>0){candles--}
+ if(candles===0){step++;render()}
+};}
+
+if(step===1){
+app.innerHTML=`
+<h2>Tebak Bentuk 💖</h2>
+<p>Pilih yang bentuknya sama yaa</p>
+<button class='ghost'>❤️</button>
+<button class='ghost'>🔺</button>
+<button class='green' onclick='next()'>⬜</button>`;}
+
+if(step===2){
+app.innerHTML=`
+<h2>TTL Kamu 🎉</h2>
+<p>23 Januari 2009 🤍</p>
+<button class='green' onclick='next()'>Lanjut</button>`;}
+
+if(step===3){
+app.innerHTML=`
+<h2>Pecahin Balon 🎈</h2>
+<p>${balloons}/5</p>
+<div class='balloon'>🎈</div>`;
+app.querySelector('.balloon').onclick=()=>{
+ balloons++;
+ if(balloons>=5){step++;render()}else render();
+};}
+
+if(step===4){
+let c=5;
+app.innerHTML=`<h2>${c}</h2>`;
+const i=setInterval(()=>{
+ c--;app.innerHTML=`<h2>${c}</h2>`;
+ if(c===0){clearInterval(i);step++;render()}
+},1000);
+}
+
+if(step===5){q('kamu ingat ini ulang tahun kamu?','yess')}
+if(step===6){q('kamu sayang sama aku ngga?','SAYANGGG BANGETT')}
+if(step===7){q('kamu cinta aku ga?','AKUU CINTAA BANGET SAMA KAMUU, I LOVEE UU')}
+if(step===8){q('kamu siap lanjut?','SIAPP')}
+if(step===9){q('kamu siap menghadapi situasi apapun di umur 17 tahun ini?','SIAPP BANGET')}
+
+if(step===10){
+app.innerHTML=`
+<h2>Happy Sweet Seventeen 🎂🤍</h2>
+<p>
+happy sweet seventeen, sayangg🎂🤍<br><br>
+sweet seventeen bukan cuma soal umur tauu tapi ini tuh tentang mimpi, harapan, dan masa depan yang lagi kamuu bangun pelan-pelan, okay?<br><br>
+aku bangga sama kamu, at 17 i hope you smile more and worry less 🤍<br><br>
+once again, happy 17th birthday, my favorite person 🎂💖
+</p>
+<button class='green' onclick='next()'>Buka Surat 💌</button>`;}
+
+if(step===11){
+app.innerHTML=`
+<h2>Surprise Letter 💌</h2>
+<p>Ketuk 3x yaa 🤍</p>
+<div class='envelope'></div>`;
+app.querySelector('.envelope').onclick=()=>{
+ taps++;
+ if(taps>=3){step++;render()}
+};}
+
+if(step===12){
+app.innerHTML=`
+<p>AKU SELALUU ADA BUAT KAMU JADI KAMU JANGAN NGERASA SENDIRIAN YAA,<br>
+I LOVEE UU SAYANGG SELAMAT ULANG TAHUNN YAA, MAS 🤍.</p>
+<button class='green' onclick='next()'>Peluk & Kiss 🤍</button>`;}
+
+if(step===13){
+app.innerHTML=`
+<div class='bigkiss'>💋💋💋</div>
+<h2>Wishlist Gunung 🏔️</h2>
+<p>Merbabu — 3.145 mdpl<br>Prau — 2.565 mdpl<br>Slamet — 3.428 mdpl<br>Rinjani — 3.726 mdpl</p>
+<p><b>semoga wishlist kamu semua tercapai yaa 🤍🌸💖</b></p>`;}
+}
+
+function q(text,greenText){
+app.innerHTML=`
+<h2>${text}</h2>
+<button class='green' onclick='next()'>${greenText}</button>
+<button class='red' onclick='alert("harus pilih yang hijau yaa 😆💚")'>tidak</button>`;}
+
+function next(){step++;render()}
+
+render();
+</script>
+</body>
+</html>
